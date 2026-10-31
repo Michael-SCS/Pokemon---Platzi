@@ -1,20 +1,27 @@
 <div align="center">
 
-<!-- Cuando tengas la captura, quita las marcas de comentario:
-<div align="center">
-  <img src="./assets/preview.png" alt="Vista previa del juego Mokepon" width="500" />
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=140&section=header&text=Mokepon&fontSize=42&fontColor=ffffff)
+
+### 🔥💧🌱 Fuego, agua o tierra: elige y enfrenta a la máquina 🔥💧🌱
+
+Proyecto del curso de programación de Platzi 🎮
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
 </div>
--->
 
 ## 🎮 ¿De qué trata?
 
-[Una o dos frases: qué elige el jugador, contra quién pelea y cómo se gana.]
+Es una versión de piedra, papel o tijeras con elementos. Eliges tu personaje y la máquina responde con fuego, agua o tierra. Según la combinación, ganas, pierdes o empatas.
 
 ## 🌟 Características
 
-- [Ej.: elegir tu personaje]
-- [Ej.: sistema de ataques]
-- [Ej.: cómo se decide el ganador]
+- 🧙 Elección de personaje
+- 🔥 Ataques de fuego, agua y tierra
+- 🤖 La máquina elige su ataque al azar
+- 🏆 Resultado de cada ronda: victoria, derrota o empate
 
 ## 🛠️ Tecnologías
 
@@ -48,6 +55,21 @@ Pokemon---Platzi/
 
 </details>
 
+## 💡 Lo que aprendí
+
+
+## 🙌 Créditos
+
+Proyecto guiado por el curso de Platzi.
 ## 👩‍💻 Autor
 
 <div align="center">
+
+**Michael Castillo**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Michael-SCS)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mscastillosaldarriaga/)
+[![Correo](https://img.shields.io/badge/Correo-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:michaelsteven3211@gmail.com)
+
+
+</div>
