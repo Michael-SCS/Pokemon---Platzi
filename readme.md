@@ -55,8 +55,6 @@ Pokemon---Platzi/
 
 </details>
 
-## 💡 Lo que aprendí
-
 
 ## 🙌 Créditos
 
