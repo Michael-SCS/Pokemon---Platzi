@@ -1,0 +1,377 @@
+/* Fuentes: Poppins (texto) y VT323 (título retro) */
+@import url("https://fonts.googleapis.com/css2?family=VT323&family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ==========================================================
+   PALETA
+   Para cambiar los colores del juego, edita solo este bloque.
+   ========================================================== */
+:root {
+  --fondo: #0f172a;
+  --tarjeta: #1e293b;
+  --borde: #334155;
+  --texto: #f1f5f9;
+  --texto-suave: #94a3b8;
+  --acento: #fbbf24;
+  --fuego: #fb923c;
+  --agua: #38bdf8;
+  --tierra: #facc15;
+  --rival: #f87171; /* color del enemigo en el marcador */
+}
+
+body {
+  /* min-height: la página mide al menos toda la ventana, aunque tenga poco contenido */
+  min-height: 100vh;
+  margin: 0;
+
+  /* Capa oscura semitransparente (primero) sobre la imagen (después).
+     Sube o baja el 0.6 para ver más o menos la imagen. */
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)),
+    url(./assets/fondo.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* fixed: la imagen queda pegada a la ventana y siempre la cubre completa */
+  background-attachment: fixed;
+  background-color: var(--fondo); /* color de respaldo si la imagen no carga */
+
+  color: var(--texto);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 100px;
+  text-align: center;
+  color: var(--acento);
+  /* Sombra oscura: separa las letras de la imagen */
+  text-shadow: 3px 3px 0 rgba(15, 23, 42, 0.9);
+}
+
+h2 {
+  color: var(--texto);
+  text-shadow: 0 2px 6px rgba(15, 23, 42, 0.9);
+}
+
+/* Los radios se ocultan: la tarjeta (label) hace de botón */
+input {
+  display: none;
+}
+
+/* ==========================================================
+   PANTALLA 1: SELECCIÓN DE MASCOTA
+   ========================================================== */
+#select-pet {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tarjetas {
+  display: flex;
+  gap: 30px;
+}
+
+.tarjetas label {
+  width: 330px;
+  height: 300px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  color: var(--texto);
+  background-color: var(--tarjeta);
+  border: 1px solid var(--borde);
+  margin-bottom: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tarjetas label img {
+  width: 200px;
+  height: 200px;
+}
+
+/* Hover y selección: la tarjeta se ilumina con el color de su elemento.
+   :has(+ input:checked) = "el label cuyo input vecino está marcado".
+   El texto pasa a oscuro para que se lea sobre fondos claros. */
+.tarjetas label.Charmander:hover,
+.tarjetas label.Charmander:has(+ input:checked) {
+  background-color: var(--fuego);
+  color: var(--fondo);
+  border-color: var(--texto);
+  box-shadow: 0 0 20px var(--fuego);
+}
+
+.tarjetas label.Squirtle:hover,
+.tarjetas label.Squirtle:has(+ input:checked) {
+  background-color: var(--agua);
+  color: var(--fondo);
+  border-color: var(--texto);
+  box-shadow: 0 0 20px var(--agua);
+}
+
+.tarjetas label.Sandshrew:hover,
+.tarjetas label.Sandshrew:has(+ input:checked) {
+  background-color: var(--tierra);
+  color: var(--fondo);
+  border-color: var(--texto);
+  box-shadow: 0 0 20px var(--tierra);
+}
+
+/* ==========================================================
+   BOTONES GENERALES
+   ========================================================== */
+button {
+  background-color: rgba(15, 23, 42, 0.85);
+  border-radius: 50px;
+  border: 1px solid var(--texto);
+  color: var(--texto);
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--acento);
+  border-color: var(--acento);
+  color: var(--fondo);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* "Volver a jugar" tiene más texto: el ancho se ajusta al contenido */
+#btn-reiniciar {
+  width: auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================
+   PANTALLA 2: COMBATE
+   ========================================================== */
+#select-attack {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- Marcador del duelo: tarjeta | VS | tarjeta ----------
+   flex-wrap hace que en pantallas angostas se apilen en vez de salirse. */
+.luchadores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin: 24px 0 32px;
+}
+
+.luchador {
+  width: 230px;
+  padding: 20px;
+  text-align: center;
+  background-color: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+}
+
+/* Borde y brillo suave de cada bando */
+.luchador.jugador {
+  border-color: var(--agua);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+}
+
+.luchador.enemigo {
+  border-color: var(--rival);
+  box-shadow: 0 0 18px rgba(248, 113, 113, 0.25);
+}
+
+/* "TU MASCOTA" / "ENEMIGO" */
+.luchador-rol {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.luchador-nombre {
+  margin: 8px 0 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* Corazones */
+.luchador-vidas {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+
+/* "VS" en la fuente retro del título */
+.vs {
+  font-family: "VT323", monospace;
+  font-size: 56px;
+  color: var(--acento);
+  text-shadow: 3px 3px 0 rgba(15, 23, 42, 0.9);
+}
+
+/* ---------- Botones de ataque ----------
+   Cada botón define su color en --color-ataque.
+   Las reglas compartidas lo leen, así no se repite código. */
+.botones-ataque {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+}
+
+#btn-fuego {
+  --color-ataque: var(--fuego);
+}
+
+#btn-agua {
+  --color-ataque: var(--agua);
+}
+
+#btn-tierra {
+  --color-ataque: var(--tierra);
+}
+
+.btn-attack {
+  /* Reposo: contorno y texto del color del elemento, sobre fondo oscuro
+     (si fuera transparente, el texto se perdería sobre la imagen) */
+  background-color: rgba(15, 23, 42, 0.85);
+  color: var(--color-ataque);
+  border: 2px solid var(--color-ataque);
+  border-radius: 50px;
+
+  width: 130px;
+  height: 46px;
+
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover: se llena del color y brilla.
+   :not(:disabled) evita que un botón bloqueado reaccione, y hace que esta
+   regla pese más que el hover general de "button" (si no, se pintaba amarillo). */
+.btn-attack:hover:not(:disabled) {
+  background-color: var(--color-ataque);
+  border-color: var(--color-ataque);
+  color: var(--fondo);
+  box-shadow: 0 0 18px var(--color-ataque);
+  transform: translateY(-2px);
+}
+
+/* Al presionar: se hunde un poquito */
+.btn-attack:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Navegación con teclado (Tab) */
+.btn-attack:focus-visible {
+  outline: 2px solid var(--texto);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   MENSAJES DE COMBATE
+   ========================================================== */
+
+/* Tarjeta centrada, con el mismo estilo que las demás.
+   El JS le pone display:flex, así que flex-direction:column apila
+   la frase y el resultado en vez de ponerlos lado a lado. */
+#Mensajes {
+  flex-direction: column;
+  max-width: 480px;
+  margin: 24px auto;
+  padding: 20px 28px;
+  text-align: center;
+  background-color: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+  animation: aparecer 0.3s ease;
+}
+
+/* Frase "Usaste X y el enemigo usó Y" */
+#descripcion-ataques {
+  margin: 0 0 12px;
+  color: var(--texto-suave);
+  line-height: 1.6;
+}
+
+/* Nombres de los ataques: color base (por si aún no tienen data-ataque) */
+#ataque-mascota-jugador,
+#ataque-mascota-enemigo {
+  color: var(--acento);
+  font-weight: 700;
+}
+
+/* Color según el ataque. Lee el atributo data-ataque que escribe el JS.
+   Las mayúsculas deben coincidir con las del JS: "Fuego", "Agua", "Tierra". */
+#Mensajes [data-ataque="Fuego"] {
+  color: var(--fuego);
+}
+
+#Mensajes [data-ataque="Agua"] {
+  color: var(--agua);
+}
+
+#Mensajes [data-ataque="Tierra"] {
+  color: var(--tierra);
+}
+
+/* Resultado del turno o de la partida.
+   El JS le pone display:flex, por eso justify-content:center lo centra. */
+#Mensajes h4 {
+  margin: 0;
+}
+
+#resultado-juego {
+  display: block;
+  justify-content: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--borde);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--texto);
+}
+
+/* Botón de reiniciar centrado (el JS le pone display:flex) */
+#Reiniciar {
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Entrada suave: se ejecuta cuando la sección pasa de oculta a visible */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

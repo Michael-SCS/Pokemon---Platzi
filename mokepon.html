@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POKEMON</title>
+
+    <!-- Estilos y script. El JS espera al evento "load", por eso puede ir en el head -->
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./js/script.js"></script>
+
+    <!-- Fuente retro del título (VT323) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ========== PANTALLA 1: ELEGIR MASCOTA ========== -->
+    <section id="select-pet">
+      <h1>POKEMON</h1>
+      <h2 class="Subtitle">Selecciona a tu personaje</h2>
+
+      <!-- Cada mascota: un label (la tarjeta) y un radio oculto justo después.
+           El for del label debe ser igual al id del input.
+           El orden label -> input lo usa el CSS con :has(+ input:checked). -->
+      <div class="tarjetas">
+        <label class="Charmander" for="Charmander"
+          >Charmander
+          <img src="./assets/charmander.png" alt="Charmander" />
+        </label>
+        <input type="radio" id="Charmander" name="pets" />
+
+        <label class="Squirtle" for="Squirtle"
+          >Squirtle
+          <img src="./assets/Squirtle.png" alt="Squirtle" />
+        </label>
+        <input type="radio" id="Squirtle" name="pets" />
+
+        <label class="Sandshrew" for="Sandshrew"
+          >Sandshrew
+          <img src="./assets/Sandshrew.png" alt="Sandshrew" />
+        </label>
+        <input type="radio" id="Sandshrew" name="pets" />
+      </div>
+
+      <button id="btn-jugar">Jugar</button>
+    </section>
+
+    <!-- ========== PANTALLA 2: COMBATE ========== -->
+    <section id="select-attack">
+      <h1>POKEMON</h1>
+      <h2 class="Subtitle">Selecciona tu ataque</h2>
+
+      <!-- Marcador del duelo: jugador VS enemigo.
+           Los corazones iniciales van escritos aquí; el JS los actualiza. -->
+      <div class="luchadores">
+        <div class="luchador jugador">
+          <p class="luchador-rol">Tu mascota</p>
+          <p class="luchador-nombre">
+            <span id="nombre-mascota-jugador"></span>
+          </p>
+          <p class="luchador-vidas">
+            <span id="vidas-mascota-jugador">❤️❤️❤️</span>
+          </p>
+        </div>
+
+        <span class="vs">VS</span>
+
+        <div class="luchador enemigo">
+          <p class="luchador-rol">Enemigo</p>
+          <p class="luchador-nombre">
+            <span id="nombre-mascota-enemigo"></span>
+          </p>
+          <p class="luchador-vidas">
+            <span id="vidas-mascota-enemigo">❤️❤️❤️</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Botones de ataque -->
+      <p class="botones-ataque">
+        <button class="btn-attack" id="btn-fuego">Fuego 🔥</button>
+        <button class="btn-attack" id="btn-agua">Agua 💧</button>
+        <button class="btn-attack" id="btn-tierra">Tierra 🌱</button>
+      </p>
+    </section>
+
+    <!-- ========== MENSAJES DE CADA TURNO ========== -->
+    <section id="Mensajes">
+      <p id="descripcion-ataques">
+        Usaste <span id="ataque-mascota-jugador"></span> y el enemigo usó
+        <span id="ataque-mascota-enemigo"></span>
+      </p>
+      <h4><span id="resultado-juego"></span></h4>
+    </section>
+
+    <!-- ========== REINICIAR (se muestra al terminar la partida) ========== -->
+    <section id="Reiniciar">
+      <button id="btn-reiniciar">Volver a jugar</button>
+    </section>
+  </body>
+</html>
